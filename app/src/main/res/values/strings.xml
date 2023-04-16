@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Project2</string>
+    <string name="titlep1">Legally Distinct</string>
+    <string name="titlep2">Pocket Monster</string>
+    <string name="loginButton">Login</string>
+    <string name="SignUp">Sign-Up</string>
+    <color name="peach">#FFE5CA</color>
+</resources>
