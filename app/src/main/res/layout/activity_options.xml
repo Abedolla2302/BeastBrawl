@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:background="@color/peach"
-    >
+    tools:context=".optionsActivity">
 
     <TextView
         android:id="@+id/titlep1"
@@ -36,11 +35,12 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/titlep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Sign In"
+        android:text="@string/helloUserText"
         android:textColor="#3A3A3A"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -52,32 +52,85 @@
         app:layout_constraintVertical_bias="0.193" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/fightButton"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:backgroundTint="#FA9884"
         android:gravity="center"
-        android:text="@string/loginButton"
+        android:text="@string/fightButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.339" />
+        app:layout_constraintVertical_bias="0.32" />
 
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/changeTeamScreenButton"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="280dp"
         android:backgroundTint="#FA9884"
         android:gravity="center"
-        android:text="@string/SignUp"
+        android:text="@string/change_team"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.206" />
+        app:layout_constraintTop_toBottomOf="@+id/fightButton" />
+
+    <Button
+        android:id="@+id/changeAttributesButton"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#FA9884"
+        android:gravity="center"
+        android:text="Change Attributes"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeTeamScreenButton"
+        app:layout_constraintVertical_bias="0.205"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="78dp"
+        android:layout_height="56dp"
+        android:src="@drawable/mouse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="78dp"
+        android:layout_height="56dp"
+        android:src="@drawable/snake"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.213"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="79dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335"
+        app:srcCompat="@drawable/wolf" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

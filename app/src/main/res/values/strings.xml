@@ -4,5 +4,12 @@
     <string name="titlep2">Pocket Monster</string>
     <string name="loginButton">Login</string>
     <string name="SignUp">Sign-Up</string>
+    <string name="changeTeamText">Change Team</string>
+    <string name="optionText">Please Select Option</string>
+    <string name="fightButtonText">Fight</string>
+    <string name="change_team">Change Team</string>
+    <string name="helloUserText">Hello User!</string>
+    <string name="BeastBrawlText">Beast Brawl</string>
+    <string name="animalArenaText">Animal Arena</string>
     <color name="peach">#FFE5CA</color>
 </resources>
