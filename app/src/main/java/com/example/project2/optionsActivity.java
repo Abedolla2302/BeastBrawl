@@ -32,6 +32,7 @@ public class optionsActivity extends AppCompatActivity {
 
     private static final String USER_ID_KEY = "om.example.project2.userIdKey";
     private int UserId = -1;
+    private int mTeamId = -1;
 
     private SharedPreferences mPreferences = null;
     private BeastBrawlDAO mBeastBrawlDAO;
@@ -41,7 +42,9 @@ public class optionsActivity extends AppCompatActivity {
     Button editAttributesButton;
     TextView helloUserText;
     ImageView attributeImage;
+    TextView teamTextView;
     private User mUser;
+    private teamLog mUserTeam;
 
 
     @Override
@@ -55,6 +58,8 @@ public class optionsActivity extends AppCompatActivity {
         loginUser(UserId);
         createBeast();
 
+        checkForUserTeam();
+
         optionsBinding = ActivityOptionsBinding.inflate(getLayoutInflater());
         View view = optionsBinding.getRoot();
 
@@ -64,6 +69,9 @@ public class optionsActivity extends AppCompatActivity {
         changeTeamButton = optionsBinding.changeTeamScreenButton;
         editAttributesButton = optionsBinding.changeAttributesButton;
         attributeImage = optionsBinding.imageView4;
+        teamTextView = optionsBinding.teamTextView;
+//
+        teamTextView.setText("Your current team is "+mUserTeam.getMonster1() + " and "+ mUserTeam.getMonster2());
 
         if(mUser.getIsAdmin() == 1){
             editAttributesButton.setVisibility(View.VISIBLE);
@@ -174,6 +182,30 @@ public class optionsActivity extends AppCompatActivity {
         mBeastBrawlDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DATABASE_NAME)
                 .allowMainThreadQueries()
                 .build().BeastBrawlDAO();
+    }
+
+    private void checkForUserTeam() {
+        //do we have team in intent?
+//        mUserTeam =  mBeastBrawlDAO.getTeamLogByUserId(UserId);
+//        //do we have user in preferences?
+//        if(mTeamId != -1){
+//            mUserTeam = mBeastBrawlDAO.getTeamLogByUserId(UserId);
+//            return;
+//        }
+
+        //is there a team for this user already?
+
+        teamLog userTeam = mBeastBrawlDAO.getTeamLogByUserId(UserId);
+        if(userTeam == null){
+            teamLog newTeam = new teamLog(UserId, Beast.mouse,Beast.lobo);
+            mBeastBrawlDAO.insert(newTeam);
+        }
+
+        mUserTeam = mBeastBrawlDAO.getTeamLogByUserId(UserId);
+        mTeamId = mUserTeam.getLogId();
+
+
+
     }
 
     @Override
