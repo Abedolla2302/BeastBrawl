@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".attributesActivity"
+    android:background="@color/peach"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574">
+
+        <LinearLayout
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/loboStatsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lobo" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="48dp"
+                android:layout_height="51dp"
+                app:srcCompat="@drawable/wolf" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/attackLoboText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hp" />
+
+            <EditText
+                android:id="@+id/loboHpField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/loboHpText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Attack" />
+
+            <EditText
+                android:id="@+id/loboAttackField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/loboDefText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Def" />
+
+            <EditText
+                android:id="@+id/loboDefField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263">
+
+        <LinearLayout
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mouseStatName"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="Mouse" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="48dp"
+                android:layout_height="51dp"
+                app:srcCompat="@drawable/mouse" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mouseHPStatText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hp" />
+
+            <EditText
+                android:id="@+id/mouseHpField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mouseAttackStatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Attack" />
+
+            <EditText
+                android:id="@+id/mouseAttackField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mouseDefenseStatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Def" />
+
+            <EditText
+                android:id="@+id/mouseDefField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.419">
+
+        <LinearLayout
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/snakeStatsName"
+                android:layout_width="50dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="Snake" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="48dp"
+                android:layout_height="51dp"
+                app:srcCompat="@drawable/snake" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/snakeHpText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hp" />
+
+            <EditText
+                android:id="@+id/snakeHpField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/snakeAttackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Attack" />
+
+            <EditText
+                android:id="@+id/snakeAttackField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/snakeDefenseStateName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Def" />
+
+            <EditText
+                android:id="@+id/snakeDefField"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:hint="0"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titlep1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titlep1"
+        android:textColor="#3A3A3A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
+
+    <TextView
+        android:id="@+id/titlep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toggle Switch to change attribute"
+        android:textColor="#3A3A3A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.193" />
+
+    <TextView
+        android:id="@+id/titlep2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/autour_one"
+        android:text="@string/titlep2"
+        android:textColor="#3A3A3A"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/titlep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titlep1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/changeAttributeButton"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#FA9884"
+        android:gravity="center"
+        android:text="@string/attributeValue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.843" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

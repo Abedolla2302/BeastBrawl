@@ -12,13 +12,36 @@ public class teamLog {
     private int logId;
     private int userId;
     private String monster1;
+    public int monster1Img;
 
     private String monster2;
+    public int monster2Img;
 
-    public teamLog(int userId, String monster1, String monster2) {
+    public teamLog(int userId, String monster1,String monster2) {
         this.userId = userId;
         this.monster1 = monster1;
         this.monster2 = monster2;
+        setMonsterImgs();
+
+    }
+
+    private void setMonsterImgs() {
+        if(monster1.equals(Beast.lobo)){
+            monster1Img = R.drawable.wolf;
+        }else if(monster1.equals(Beast.mouse)){
+            monster1Img = R.drawable.mouse;
+        }else if(monster1.equals(Beast.snake)){
+            monster1Img = R.drawable.snake;
+        }
+
+        if(monster2.equals(Beast.lobo)){
+            monster2Img = R.drawable.wolf;
+        }else if(monster2.equals(Beast.mouse)){
+            monster2Img = R.drawable.mouse;
+        }else if(monster2.equals(Beast.snake)){
+            monster2Img = R.drawable.snake;
+        }
+
     }
 
     public int getUserId() {
@@ -50,6 +73,22 @@ public class teamLog {
 
     public void setMonster2(String monster2) {
         this.monster2 = monster2;
+    }
+
+    public int getMonster1Img() {
+        return monster1Img;
+    }
+
+    public void setMonster1Img(int monster1Img) {
+        this.monster1Img = monster1Img;
+    }
+
+    public int getMonster2Img() {
+        return monster2Img;
+    }
+
+    public void setMonster2Img(int monster2Img) {
+        this.monster2Img = monster2Img;
     }
 
     @Override

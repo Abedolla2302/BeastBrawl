@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "7fcb7e841307c27115f4792e2ce35316",
+    "identityHash": "ab3858de3e584c05e6e61c49140f29a5",
     "entities": [
       {
         "tableName": "teamLog_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`logId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userId` INTEGER NOT NULL, `monster1` TEXT, `monster2` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`logId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userId` INTEGER NOT NULL, `monster1` TEXT, `monster1Img` INTEGER NOT NULL, `monster2` TEXT, `monster2Img` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "logId",
@@ -27,10 +27,22 @@
             "notNull": false
           },
           {
+            "fieldPath": "monster1Img",
+            "columnName": "monster1Img",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "monster2",
             "columnName": "monster2",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "monster2Img",
+            "columnName": "monster2Img",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -128,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7fcb7e841307c27115f4792e2ce35316')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ab3858de3e584c05e6e61c49140f29a5')"
     ]
   }
 }

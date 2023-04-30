@@ -12,7 +12,12 @@ public class Beast {
     private int beastId;
 
     static final String lobo = "lobo";
+    static final int loboImg = R.drawable.wolf;
     static final String mouse = "mouse";
+    static final int mouseImg = R.drawable.mouse;
+
+    static final String snake = "snake";
+    static final int SnakeImg = R.drawable.snake;
 
     private String beastName;
 
@@ -27,6 +32,13 @@ public class Beast {
         this.health = health;
         this.defense = defense;
         this.attack = attack;
+    }
+
+    public Beast(Beast b){
+        this.beastName = b.getBeastName();
+        this.health = b.getHealth();
+        this.defense = b.getDefense();
+        this.attack = b.getAttack();
     }
 
     public int getBeastId() {

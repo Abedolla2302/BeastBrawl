@@ -57,7 +57,6 @@ public class optionsActivity extends AppCompatActivity {
         addUserToPreference(UserId);
         loginUser(UserId);
         createBeast();
-
         checkForUserTeam();
 
         optionsBinding = ActivityOptionsBinding.inflate(getLayoutInflater());
@@ -85,6 +84,14 @@ public class optionsActivity extends AppCompatActivity {
         helloUserText = optionsBinding.titlep;
         helloUserText.setText("Hello "+mUser.getUserName()+ "!");
 
+        fightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(optionsActivity.this, "Fight starting!!", Toast.LENGTH_SHORT).show();
+                Intent intent = fightActivity.intentFactory(getApplicationContext(), UserId);
+                startActivity(intent);
+            }
+        });
         changeTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,9 +105,10 @@ public class optionsActivity extends AppCompatActivity {
     private void createBeast() {
         List<Beast> beast = mBeastBrawlDAO.getAllBeast();
         if(beast.size() <= 0){
-            Beast lobo = new Beast(Beast.lobo,15,4,7);
-            Beast mouse = new Beast(Beast.mouse,10,10,6);
-            mBeastBrawlDAO.insert(lobo, mouse);
+            Beast lobo = new Beast(Beast.lobo,attributes.loboHealth,attributes.loboDefense,attributes.loboAttack);
+            Beast mouse = new Beast(Beast.mouse,attributes.mouseHealth,attributes.mouseDefense,attributes.mouseAttack);
+            Beast snake = new Beast(Beast.snake,attributes.snakeHealth,attributes.snakeDefense,attributes.snakeAttack);
+            mBeastBrawlDAO.insert(lobo, mouse, snake);
         }
     }
 
@@ -118,7 +126,7 @@ public class optionsActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    //TODO
+
     private void addUserToPreference(int userId) {
         if(mPreferences == null){
             getPrefs();
@@ -185,26 +193,14 @@ public class optionsActivity extends AppCompatActivity {
     }
 
     private void checkForUserTeam() {
-        //do we have team in intent?
-//        mUserTeam =  mBeastBrawlDAO.getTeamLogByUserId(UserId);
-//        //do we have user in preferences?
-//        if(mTeamId != -1){
-//            mUserTeam = mBeastBrawlDAO.getTeamLogByUserId(UserId);
-//            return;
-//        }
-
         //is there a team for this user already?
-
         teamLog userTeam = mBeastBrawlDAO.getTeamLogByUserId(UserId);
         if(userTeam == null){
             teamLog newTeam = new teamLog(UserId, Beast.mouse,Beast.lobo);
             mBeastBrawlDAO.insert(newTeam);
         }
-
         mUserTeam = mBeastBrawlDAO.getTeamLogByUserId(UserId);
         mTeamId = mUserTeam.getLogId();
-
-
 
     }
 
@@ -245,6 +241,7 @@ public class optionsActivity extends AppCompatActivity {
     }
 
     private void clearUserFromIntent(){
+
         getIntent().putExtra(USER_ID_KEY,-1);
     }
 

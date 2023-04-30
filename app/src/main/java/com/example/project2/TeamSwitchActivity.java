@@ -87,8 +87,10 @@ public class TeamSwitchActivity extends AppCompatActivity {
 
     private void addTeamToUser() {
         List<String> beastNames = new ArrayList<>();
+        List<Integer> imgNames = new ArrayList<>();
         if(loboSwitch.isChecked()){
             beastNames.add(Beast.lobo);
+
         }
         if(mouseSwitch.isChecked()){
             beastNames.add(Beast.mouse);
@@ -97,7 +99,7 @@ public class TeamSwitchActivity extends AppCompatActivity {
         if(mBeastBrawlDAO.getTeamLogByUserId(UserId) != null){
             mBeastBrawlDAO.delete(mBeastBrawlDAO.getTeamLogByUserId(UserId));
         }
-        teamLog newTeam = new teamLog(UserId, beastNames.get(0),beastNames.get(1) );
+        teamLog newTeam = new teamLog(UserId, beastNames.get(0),beastNames.get(1));
         mBeastBrawlDAO.insert(newTeam);
     }
 

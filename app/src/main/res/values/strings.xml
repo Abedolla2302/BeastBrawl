@@ -11,5 +11,10 @@
     <string name="helloUserText">Hello User!</string>
     <string name="BeastBrawlText">Beast Brawl</string>
     <string name="animalArenaText">Animal Arena</string>
+    <string name="attributeValue">Change Attributes</string>
+    <string name="healthText">HP</string>
+    <string name="beastRecycleView">HP</string>
     <color name="peach">#FFE5CA</color>
+
+
 </resources>
