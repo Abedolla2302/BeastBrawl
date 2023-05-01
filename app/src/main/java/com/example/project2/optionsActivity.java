@@ -118,10 +118,24 @@ public class optionsActivity extends AppCompatActivity {
         List<Beast> beast = mBeastBrawlDAO.getAllBeast();
         if(beast.size() <= 0){
             Beast lobo = new Beast(Beast.lobo,attributes.loboHealth,attributes.loboDefense,attributes.loboAttack);
+
             Beast mouse = new Beast(Beast.mouse,attributes.mouseHealth,attributes.mouseDefense,attributes.mouseAttack);
+
             Beast snake = new Beast(Beast.snake,attributes.snakeHealth,attributes.snakeDefense,attributes.snakeAttack);
+
             mBeastBrawlDAO.insert(lobo, mouse, snake);
         }
+        attributes.setLoboDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.lobo).getDefense());
+        attributes.setLoboHealth(mBeastBrawlDAO.getBeastByBeastName(Beast.lobo).getHealth());
+        attributes.setLoboDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.lobo).getDefense());
+
+        attributes.setMouseDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.mouse).getDefense());
+        attributes.setMouseHealth(mBeastBrawlDAO.getBeastByBeastName(Beast.mouse).getHealth());
+        attributes.setMouseDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.mouse).getDefense());
+
+        attributes.setSnakeDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.snake).getDefense());
+        attributes.setSnakeHealth(mBeastBrawlDAO.getBeastByBeastName(Beast.snake).getHealth());
+        attributes.setSnakeDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.snake).getDefense());
     }
 
     private void loginUser(int userId) {

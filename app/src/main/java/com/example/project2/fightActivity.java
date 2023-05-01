@@ -23,6 +23,7 @@ import com.example.project2.DB.BeastBrawlDAO;
 import com.example.project2.databinding.ActivityFightBinding;
 
 import java.util.List;
+import java.util.Random;
 
 public class fightActivity extends AppCompatActivity {
 
@@ -55,7 +56,7 @@ public class fightActivity extends AppCompatActivity {
     private Beast userBeast1;
     private Beast userBeast2;
     private Beast opponentBeast1;
-
+    Random randomChoice = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,8 @@ public class fightActivity extends AppCompatActivity {
         addUserToPreference(UserId);
         loginUser(UserId);
         checkForUserTeam();
+
+        randomChoice.setSeed(124332598);
 
         fightButton = mFightBinding.attackButton;
         returnButton = mFightBinding.leaveButton;
@@ -103,6 +106,8 @@ public class fightActivity extends AppCompatActivity {
             }
         });
 
+
+
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +126,8 @@ public class fightActivity extends AppCompatActivity {
 
         int userAttackDamage = 0;
 
-        if(opponentAttack == 1){
+        if(opponentAttack == 0){
+            opponentAttack = 1;
             Toast.makeText(fightActivity.this, "Opponent gaurded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
             userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,true);
         }else{
@@ -138,10 +144,12 @@ public class fightActivity extends AppCompatActivity {
             public void run(){
                 if(!defend){
                     Toast.makeText(fightActivity.this, "You attacked opponent for "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT).show();
+                    opponentBeast1.setHealth(opponentBeast1.getHealth()- finalUserAttackDamage);
                 }else{
-                    Toast.makeText(fightActivity.this, "You gaurded and only did "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(fightActivity.this, "You gaurded and only did "+(1)+" damage", Toast.LENGTH_SHORT).show();
+                    opponentBeast1.setHealth(opponentBeast1.getHealth()- 1);
                 }
-                opponentBeast1.setHealth(opponentBeast1.getHealth()- finalUserAttackDamage);
+
                 setBeastHealth();
             }
         };
@@ -273,15 +281,22 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private int opponentTurn(Boolean uGuard){
-
+        int attackDam = attack.attackTarget(opponentBeast1, userBeast1, uGuard);
         if(userBeast1.getHealth() == attributes.getBeastHealth(userBeast1.getBeastName())){
-            return( attack.attackTarget(opponentBeast1, userBeast1, uGuard));
+            return( attackDam);
         }
-
-        if(opponentBeast1.getHealth() <= 4){
-            return(1);
+        else if(userBeast1.getHealth() - attackDam <= 0){
+            return( attackDam);
+        }
+        else if(opponentBeast1.getHealth() <= 4){
+            return(0);
         }else{
-            return( attack.attackTarget(opponentBeast1, userBeast1, uGuard));
+            int choice = randomChoice.nextInt(2);
+            if(choice == 0){
+                return(attackDam);
+            }else {
+                return 0;
+            }
         }
     }
 
