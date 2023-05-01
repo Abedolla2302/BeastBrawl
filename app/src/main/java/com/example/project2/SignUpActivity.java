@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(usernameField.getText().toString() != null && passwordField1.getText().toString() != null){
+                if(usernameField.getText().toString() != " " && passwordField1.getText().toString() != " "){
                     String userName = usernameField.getText().toString();
                     if(mBeastBrawlDAO.getUserByUsername(userName) != null){
                         Toast.makeText(SignUpActivity.this, "User exist already!!", Toast.LENGTH_SHORT).show();

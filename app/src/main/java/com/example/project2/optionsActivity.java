@@ -237,7 +237,6 @@ public class optionsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item2:
                 logoutUser();
-                finish();
             default:
 
         }

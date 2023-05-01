@@ -32,6 +32,9 @@ public class fightActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "om.example.project2.userIdKey";
     Button returnButton;
     Button fightButton;
+    Button defendButton;
+    Button potionButton;
+
     ImageView userBeast;
     ImageView opponentBeast;
 
@@ -57,6 +60,7 @@ public class fightActivity extends AppCompatActivity {
     private Beast userBeast2;
     private Beast opponentBeast1;
     Random randomChoice = new Random();
+    int potionUses = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,8 @@ public class fightActivity extends AppCompatActivity {
 
         fightButton = mFightBinding.attackButton;
         returnButton = mFightBinding.leaveButton;
+        defendButton = mFightBinding.defendButton;
+        potionButton = mFightBinding.potionButton;
 
         userHealth = mFightBinding.hpLabel;
         userBeastName = mFightBinding.userBeastNameLabel;
@@ -106,6 +112,44 @@ public class fightActivity extends AppCompatActivity {
             }
         });
 
+        defendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attackTurn(true,false);
+                if(!checkHealth(opponentBeast1)){
+                    Toast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT).show();
+                }
+                if(!checkHealth(userBeast1)){
+                    Toast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        potionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(potionUses > 0){
+                    potionUses--;
+                    Runnable r = new Runnable() {
+                        @Override
+                        public void run(){
+                            Toast.makeText(fightActivity.this,"You only have "+ potionUses+ " potions left", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+                    Handler h = new Handler();
+                    h.postDelayed(r, 1000);
+                }else{
+                    return;
+                }
+                attackTurn(false,true);
+                if(!checkHealth(opponentBeast1)){
+                    Toast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT).show();
+                }
+                if(!checkHealth(userBeast1)){
+                    Toast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -120,15 +164,29 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private void attackTurn(Boolean defend, Boolean Item){
+        if(Item){
+            int potionHeal = attributes.getBeastHealth(userBeast1.getBeastName())/8;
+            Toast.makeText(fightActivity.this, "You used a potion to heal " + potionHeal+ " health", Toast.LENGTH_SHORT).show();
+            userBeast1.setHealth(userBeast1.getHealth() + potionHeal);
+            setBeastHealth();
+            Runnable r = new Runnable() {
+                @Override
+                public void run(){
+                }
+            };
+            Handler h = new Handler();
+            h.postDelayed(r, 1000);
+        }
 
-        //if damageTaken is 1, then that means opponent gaurded and didn't attack you
+
+        //if damageTaken is 1, then that means opponent guarded and didn't attack you
         int opponentAttack = opponentTurn(defend);
 
         int userAttackDamage = 0;
 
         if(opponentAttack == 0){
             opponentAttack = 1;
-            Toast.makeText(fightActivity.this, "Opponent gaurded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
+            Toast.makeText(fightActivity.this, "Opponent guarded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
             userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,true);
         }else{
             Toast.makeText(fightActivity.this, "Opponent attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
@@ -143,8 +201,12 @@ public class fightActivity extends AppCompatActivity {
             @Override
             public void run(){
                 if(!defend){
-                    Toast.makeText(fightActivity.this, "You attacked opponent for "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT).show();
-                    opponentBeast1.setHealth(opponentBeast1.getHealth()- finalUserAttackDamage);
+                    if(Item){
+
+                    }else{
+                        Toast.makeText(fightActivity.this, "You attacked opponent for "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT).show();
+                        opponentBeast1.setHealth(opponentBeast1.getHealth()- finalUserAttackDamage);
+                    }
                 }else{
                     Toast.makeText(fightActivity.this, "You gaurded and only did "+(1)+" damage", Toast.LENGTH_SHORT).show();
                     opponentBeast1.setHealth(opponentBeast1.getHealth()- 1);
@@ -190,8 +252,10 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private void setBeastHealth() {
-
-        if(userBeast1.getHealth() >0){
+        if(userBeast1.getHealth() > attributes.getBeastHealth(userBeast1.getBeastName())){
+            userHealth.setText("HP: "+ attributes.getBeastHealth(userBeast1.getBeastName()) + "/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
+        }
+        else if(userBeast1.getHealth() >0){
             userHealth.setText("HP: "+ userBeast1.getHealth() + "/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
         }else{
             userHealth.setText("HP: 0/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
@@ -219,7 +283,6 @@ public class fightActivity extends AppCompatActivity {
         userBeast2 = new Beast(mUserTeam.getMonster1(),newHealth,newDefense,newAttack);
 
         opponentBeast1 = new Beast(mBeastBrawlDAO.getBeastByBeastName(Beast.snake));
-
     }
 
     private void getDatabase(){

@@ -41,6 +41,7 @@ public class TeamSwitchActivity extends AppCompatActivity {
     Switch loboSwitch;
     Switch mouseSwitch;
 
+    Switch snakeSwitch;
     private int UserId = -1;
 
     private User mUser;
@@ -67,18 +68,19 @@ public class TeamSwitchActivity extends AppCompatActivity {
         teamSwitchButton = teamSwitchBinding.changeTeamButton;
         loboSwitch = teamSwitchBinding.switchFirst;
         mouseSwitch = teamSwitchBinding.switchSecond;
+        snakeSwitch = teamSwitchBinding.snakeSwitch;
 
 
         teamSwitchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(checkForTwoBeast()){
+                if(checkForOneBeast()){
                     Toast.makeText(TeamSwitchActivity.this,"Team switch Success!!",Toast.LENGTH_SHORT).show();
                     addTeamToUser();
                     Intent intent = optionsActivity.intentFactory(getApplicationContext(),UserId);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(TeamSwitchActivity.this,"please pick two beast",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeamSwitchActivity.this,"please pick One beast",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -95,7 +97,10 @@ public class TeamSwitchActivity extends AppCompatActivity {
         if(mouseSwitch.isChecked()){
             beastNames.add(Beast.mouse);
         }
-
+        if(snakeSwitch.isChecked()){
+            beastNames.add(Beast.snake);
+        }
+        beastNames.add(Beast.snake);
         if(mBeastBrawlDAO.getTeamLogByUserId(UserId) != null){
             mBeastBrawlDAO.delete(mBeastBrawlDAO.getTeamLogByUserId(UserId));
         }
@@ -104,7 +109,7 @@ public class TeamSwitchActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkForTwoBeast() {
+    private boolean checkForOneBeast() {
         int totalBeast = 0;
         if(loboSwitch.isChecked()){
             totalBeast++;
@@ -112,7 +117,10 @@ public class TeamSwitchActivity extends AppCompatActivity {
         if(mouseSwitch.isChecked()){
             totalBeast++;
         }
-        if(totalBeast == 2){
+        if(snakeSwitch.isChecked()){
+            totalBeast++;
+        }
+        if(totalBeast == 1){
             return true;
         }
         return false;

@@ -24,7 +24,7 @@
         android:id="@+id/titlep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Choose 2"
+        android:text="Please Choose 1"
         android:textColor="#3A3A3A"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -77,7 +77,7 @@
     <Switch
         android:id="@+id/switchFirst"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="Lobo"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +90,7 @@
     <Switch
         android:id="@+id/switchSecond"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="Mouse"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,6 +112,31 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        app:layout_constraintVertical_bias="0.763" />
+
+    <Switch
+        android:id="@+id/snakeSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Snake"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.247"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.606" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.127"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.611"
+        app:srcCompat="@drawable/snake" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

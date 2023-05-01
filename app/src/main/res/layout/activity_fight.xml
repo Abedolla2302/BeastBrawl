@@ -104,13 +104,13 @@
         android:id="@+id/attackButton"
         android:layout_width="150dp"
         android:layout_height="52dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="68dp"
         android:backgroundTint="#FA9884"
         android:text="Attack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.248"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -118,14 +118,39 @@
         android:id="@+id/leaveButton"
         android:layout_width="150dp"
         android:layout_height="52dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="68dp"
         android:backgroundTint="#FA9884"
         android:text="Leave Fight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toEndOf="@+id/attackButton"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <Button
+        android:id="@+id/defendButton"
+        android:layout_width="150dp"
+        android:layout_height="52dp"
+        android:backgroundTint="#FA9884"
+        android:text="Defend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.797" />
+
+    <Button
+        android:id="@+id/potionButton"
+        android:layout_width="150dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FA9884"
+        android:text="Potion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toEndOf="@+id/defendButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
