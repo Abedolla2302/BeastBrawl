@@ -41,48 +41,48 @@ public class attributes {
         return loboHealth;
     }
 
-    public void setLoboHealth(int loboHealth) {
-        this.loboHealth = loboHealth;
+    public static void setLoboHealth(int loboHealth) {
+        attributes.loboHealth = loboHealth;
     }
 
     public int getLoboAttack() {
         return loboAttack;
     }
 
-    public void setLoboAttack(int loboAttack) {
-        this.loboAttack = loboAttack;
+    public static void setLoboAttack(int loboAttack) {
+        attributes.loboAttack = loboAttack;
     }
 
     public int getLoboDefense() {
         return loboDefense;
     }
 
-    public void setLoboDefense(int loboDefense) {
-        this.loboDefense = loboDefense;
+    public static void setLoboDefense(int loboDefense) {
+        attributes.loboDefense = loboDefense;
     }
 
     public int getMouseHealth() {
         return mouseHealth;
     }
 
-    public void setMouseHealth(int mouseHealth) {
-        this.mouseHealth = mouseHealth;
+    public static void setMouseHealth(int mouseHealth) {
+        attributes.mouseHealth = mouseHealth;
     }
 
     public int getMouseAttack() {
         return mouseAttack;
     }
 
-    public void setMouseAttack(int mouseAttack) {
-        this.mouseAttack = mouseAttack;
+    public static void setMouseAttack(int mouseAttack) {
+        attributes.mouseAttack = mouseAttack;
     }
 
     public int getMouseDefense() {
         return mouseDefense;
     }
 
-    public void setMouseDefense(int mouseDefense) {
-        this.mouseDefense = mouseDefense;
+    public static void setMouseDefense(int mouseDefense) {
+        attributes.mouseDefense = mouseDefense;
     }
 
     public static int getBeastHealth(String beast){

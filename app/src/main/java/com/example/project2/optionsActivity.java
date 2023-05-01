@@ -90,6 +90,7 @@ public class optionsActivity extends AppCompatActivity {
                 Toast.makeText(optionsActivity.this, "Fight starting!!", Toast.LENGTH_SHORT).show();
                 Intent intent = fightActivity.intentFactory(getApplicationContext(), UserId);
                 startActivity(intent);
+                finish();
             }
         });
         changeTeamButton.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +99,17 @@ public class optionsActivity extends AppCompatActivity {
                 Toast.makeText(optionsActivity.this, "Change Team pressed!!", Toast.LENGTH_SHORT).show();
                 Intent intent = TeamSwitchActivity.intentFactory(getApplicationContext(), UserId);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        editAttributesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(optionsActivity.this, "Change Attributes pressed!!", Toast.LENGTH_SHORT).show();
+                Intent intent = attributesActivity.intentFactory(getApplicationContext(), UserId);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -180,6 +192,7 @@ public class optionsActivity extends AppCompatActivity {
 
         Intent intent = MainActivity.intentFactory(this,-1);
         startActivity(intent);
+        finish();
     }
 
     private void getPrefs() {
@@ -210,6 +223,7 @@ public class optionsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item2:
                 logoutUser();
+                finish();
             default:
 
         }

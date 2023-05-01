@@ -119,16 +119,16 @@ public class fightActivity extends AppCompatActivity {
         //if damageTaken is 1, then that means opponent gaurded and didn't attack you
         int opponentAttack = opponentTurn(defend);
 
-
         int userAttackDamage = 0;
 
         if(opponentAttack == 1){
+            Toast.makeText(fightActivity.this, "Opponent gaurded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
             userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,true);
         }else{
+            Toast.makeText(fightActivity.this, "Opponent attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
             userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,false);
         }
 
-        Toast.makeText(fightActivity.this, "Opponent attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
         userBeast1.setHealth(userBeast1.getHealth()-opponentAttack);
         setBeastHealth();
 
@@ -146,7 +146,7 @@ public class fightActivity extends AppCompatActivity {
             }
         };
         Handler h = new Handler();
-        h.postDelayed(r, 2000);
+        h.postDelayed(r, 1500);
     }
 
     private boolean checkHealth(Beast b){
@@ -277,6 +277,7 @@ public class fightActivity extends AppCompatActivity {
         if(userBeast1.getHealth() == attributes.getBeastHealth(userBeast1.getBeastName())){
             return( attack.attackTarget(opponentBeast1, userBeast1, uGuard));
         }
+
         if(opponentBeast1.getHealth() <= 4){
             return(1);
         }else{
