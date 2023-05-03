@@ -67,7 +67,7 @@ public class loginActivity extends AppCompatActivity {
                 getValuesFromDisplay();
                 if(checkForUserInDatabase()){
                     if(validatePassword()){
-                        Intent intent = optionsActivity.intentFactory(getApplicationContext(), mUser.getUserId());
+                        Intent intent = landingActivity.intentFactory(getApplicationContext(), mUser.getUserId());
                         startActivity(intent);
                     }else{
                         Toast.makeText(loginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();

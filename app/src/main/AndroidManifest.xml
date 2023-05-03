@@ -22,7 +22,7 @@
             android:name=".loginActivity"
             android:exported="false" />
         <activity
-            android:name=".optionsActivity"
+            android:name=".landingActivity"
             android:exported="false" />
         <activity
             android:name=".TeamSwitchActivity"

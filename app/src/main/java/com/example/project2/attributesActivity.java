@@ -91,7 +91,7 @@ public class attributesActivity extends AppCompatActivity {
                 checkBirdChange();
 
                 Toast.makeText(attributesActivity.this,"Beast Stats have changed,Going back to landing Page!",Toast.LENGTH_SHORT).show();
-                Intent intent = optionsActivity.intentFactory(getApplicationContext(),UserId);
+                Intent intent = landingActivity.intentFactory(getApplicationContext(),UserId);
                 startActivity(intent);
 
             }

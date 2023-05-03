@@ -31,11 +31,11 @@ import android.widget.Toast;
 
 import com.example.project2.DB.AppDataBase;
 import com.example.project2.DB.BeastBrawlDAO;
-import com.example.project2.databinding.ActivityOptionsBinding;
+import com.example.project2.databinding.ActivityLandingBinding;
 
 import java.util.List;
 
-public class optionsActivity extends AppCompatActivity {
+public class landingActivity extends AppCompatActivity {
 
     private static final String USER_ID_KEY = "om.example.project2.userIdKey";
     private int UserId = -1;
@@ -43,7 +43,7 @@ public class optionsActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences = null;
     private BeastBrawlDAO mBeastBrawlDAO;
-    ActivityOptionsBinding optionsBinding;
+    ActivityLandingBinding optionsBinding;
     Button fightButton;
     Button changeTeamButton;
     Button editAttributesButton;
@@ -57,7 +57,7 @@ public class optionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_options);
+        setContentView(R.layout.activity_landing);
 
         getDatabase();
         checkForUser();
@@ -67,7 +67,7 @@ public class optionsActivity extends AppCompatActivity {
         checkForUserTeam();
         createNotificationChannel();
 
-        optionsBinding = ActivityOptionsBinding.inflate(getLayoutInflater());
+        optionsBinding = ActivityLandingBinding.inflate(getLayoutInflater());
         View view = optionsBinding.getRoot();
 
         setContentView(view);
@@ -91,13 +91,13 @@ public class optionsActivity extends AppCompatActivity {
         fightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(optionsActivity.this, "myChannel")
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(landingActivity.this, "myChannel")
                         .setSmallIcon(Beast.loboImg)
                         .setContentTitle("BeastBrawl")
                         .setContentText("Don't Leave the Fight")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(optionsActivity.this);
-                if (ActivityCompat.checkSelfPermission(optionsActivity.this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(landingActivity.this);
+                if (ActivityCompat.checkSelfPermission(landingActivity.this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 notificationManager.notify(123, builder.build());
@@ -110,7 +110,7 @@ public class optionsActivity extends AppCompatActivity {
         changeTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(optionsActivity.this, "Change Team pressed!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(landingActivity.this, "Change Team pressed!!", Toast.LENGTH_SHORT).show();
                 Intent intent = TeamSwitchActivity.intentFactory(getApplicationContext(), UserId);
                 startActivity(intent);
                 finish();
@@ -120,7 +120,7 @@ public class optionsActivity extends AppCompatActivity {
         editAttributesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(optionsActivity.this, "Change Attributes pressed!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(landingActivity.this, "Change Attributes pressed!!", Toast.LENGTH_SHORT).show();
                 Intent intent = attributesActivity.intentFactory(getApplicationContext(), UserId);
                 startActivity(intent);
                 finish();
@@ -199,13 +199,13 @@ public class optionsActivity extends AppCompatActivity {
         return true;
     }
     public static Intent getIntent(Context context){
-        Intent intent = new Intent(context, optionsActivity.class);
+        Intent intent = new Intent(context, landingActivity.class);
         return intent;
 
     }
 
     public static Intent intentFactory(Context context, int userId){
-        Intent intent = new Intent(context, optionsActivity.class);
+        Intent intent = new Intent(context, landingActivity.class);
         intent.putExtra(USER_ID_KEY, userId);
 
         return intent;

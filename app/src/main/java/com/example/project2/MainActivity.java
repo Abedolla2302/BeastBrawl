@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         UserId = getIntent().getIntExtra(USER_ID_KEY, -1);
         //do we have user in preferences?
         if(UserId != -1){
-            Intent intent = optionsActivity.intentFactory(getApplicationContext(), UserId);
+            Intent intent = landingActivity.intentFactory(getApplicationContext(), UserId);
             startActivity(intent);
             return;
         }
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         UserId= preferences.getInt(USER_ID_KEY, -1);
         if(UserId != -1){
-            Intent intent = optionsActivity.intentFactory(getApplicationContext(), UserId);
+            Intent intent = landingActivity.intentFactory(getApplicationContext(), UserId);
             startActivity(intent);
             return;
         }

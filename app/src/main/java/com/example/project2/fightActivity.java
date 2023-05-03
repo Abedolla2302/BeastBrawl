@@ -257,7 +257,7 @@ public class fightActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = optionsActivity.intentFactory(getApplicationContext(),UserId);
+                        Intent intent = landingActivity.intentFactory(getApplicationContext(),UserId);
                         startActivity(intent);
                     }
                 });
