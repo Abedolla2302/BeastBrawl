@@ -101,10 +101,8 @@ public class landingActivity extends AppCompatActivity {
                     return;
                 }
                 notificationManager.notify(123, builder.build());
+                askUserToFlipScreen();
 
-                Intent intent = fightActivity.intentFactory(getApplicationContext(), UserId);
-                startActivity(intent);
-                finish();
             }
         });
         changeTeamButton.setOnClickListener(new View.OnClickListener() {
@@ -294,6 +292,22 @@ public class landingActivity extends AppCompatActivity {
 
                     }
                 });
+        alertBuilder.create().show();
+    }
+    private void askUserToFlipScreen(){
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage("Please rotate screen");
+
+        alertBuilder.setPositiveButton("Okay",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = fightActivity.intentFactory(getApplicationContext(), UserId);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
         alertBuilder.create().show();
     }
 

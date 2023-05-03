@@ -114,7 +114,7 @@ public class attributesActivity extends AppCompatActivity {
                 if(mouseAltSwitch.isChecked()){
                     Beast.setMouseImg(R.drawable.mousealt);
                 }else{
-                    Beast.setMouseImg(R.drawable.mouse);
+                    Beast.setMouseImg(R.drawable.boxingmouse);
                 }
             }
         });

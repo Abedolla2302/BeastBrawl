@@ -69,6 +69,8 @@ public class fightActivity extends AppCompatActivity {
     Random randomChoice = new Random();
     int potionUses = 2;
 
+    int opponentBeastMaxhealth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +173,7 @@ public class fightActivity extends AppCompatActivity {
         userBeast = mFightBinding.userBeast;
 
         opponentBeast = mFightBinding.opponentBeast;
+
     }
 
     private boolean checkForWinner(){
@@ -301,8 +304,9 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private void setBeastHealth() {
+
         userHpBar.setMax(attributes.getBeastHealth(currBeast.getBeastName()));
-        opHpBar.setMax(attributes.getBeastHealth(opponentBeast1.getBeastName()));
+        opHpBar.setMax(opponentBeastMaxhealth);
         if(currBeast.getHealth() > attributes.getBeastHealth(currBeast.getBeastName())){
             userHealth.setText("HP: "+ attributes.getBeastHealth(currBeast.getBeastName()) + "/"+ attributes.getBeastHealth(currBeast.getBeastName()));
             userHpBar.setProgress(attributes.getBeastHealth(currBeast.getBeastName()));
@@ -316,10 +320,10 @@ public class fightActivity extends AppCompatActivity {
         }
 
         if(opponentBeast1.getHealth() > 0){
-            opponentHealth.setText("HP: "+ opponentBeast1.getHealth() + "/"+ attributes.getBeastHealth(opponentBeast1.getBeastName()));
+            opponentHealth.setText("HP: "+ opponentBeast1.getHealth() + "/"+ opponentBeastMaxhealth);
             opHpBar.setProgress(opponentBeast1.getHealth(),true);
         }else{
-            opponentHealth.setText("HP: 0/" + attributes.getBeastHealth(opponentBeast1.getBeastName()));
+            opponentHealth.setText("HP: 0/" + opponentBeastMaxhealth);
             opHpBar.setProgress(0,true);
         }
     }
@@ -339,6 +343,8 @@ public class fightActivity extends AppCompatActivity {
         userBeast2 = new Beast(mUserTeam.getMonster1(),newHealth,newDefense,newAttack);
 
         opponentBeast1 = new Beast(mBeastBrawlDAO.getBeastByBeastName(Beast.snake));
+        opponentBeastMaxhealth = opponentBeast1.getHealth()*3;
+        opponentBeast1.setHealth(opponentBeastMaxhealth);
     }
 
     private void getDatabase(){
@@ -401,7 +407,7 @@ public class fightActivity extends AppCompatActivity {
 
     private int opponentTurn(Boolean uGuard){
         int attackDam = attack.attackTarget(opponentBeast1, currBeast, uGuard);
-        if(currBeast.getHealth() == attributes.getBeastHealth(currBeast.getBeastName())){
+        if(currBeast.getHealth() == attributes.getBeastHealth(currBeast.getBeastName()) || opponentBeast1.getHealth() >= (opponentBeastMaxhealth/2)){
             return( attackDam);
         }
         else if(currBeast.getHealth() - attackDam <= 0){
