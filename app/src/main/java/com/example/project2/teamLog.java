@@ -42,6 +42,8 @@ public class teamLog {
             monster2Img = R.drawable.boxingmouse;
         }else if(monster2.equals(Beast.snake)){
             monster2Img = R.drawable.snake;
+        }else if (monster1.equals(Beast.bird)) {
+            monster2Img = Beast.birdImage;
         }
 
     }

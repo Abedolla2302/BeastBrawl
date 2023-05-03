@@ -62,6 +62,7 @@ public class fightActivity extends AppCompatActivity {
 
     private teamLog mUserTeam;
 
+    private Beast currBeast;
     private Beast userBeast1;
     private Beast userBeast2;
     private Beast opponentBeast1;
@@ -86,6 +87,7 @@ public class fightActivity extends AppCompatActivity {
         randomChoice.setSeed(System.currentTimeMillis());
         wireUpDisplay();
         setBeasts();
+        currBeast = userBeast1;
         setBeastNames();
         setBeastHealth();
 
@@ -93,10 +95,12 @@ public class fightActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                attackTurn(false,false);
-                if(!checkHealth(opponentBeast1)){
-                    Toast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT).show();
+                if(checkForWinner()){
+//                    StyleableToast.makeText(fightActivity.this,"Game is over",Toast.LENGTH_SHORT,R.style.mytoast).show();
+                    return;
                 }
+                attackTurn(false,false);
+                checkForWinner();
 
             }
         });
@@ -104,19 +108,22 @@ public class fightActivity extends AppCompatActivity {
         defendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(checkForWinner()){
+//                    StyleableToast.makeText(fightActivity.this,"Game is over",Toast.LENGTH_SHORT,R.style.mytoast).show();
+                    return;
+                }
                 attackTurn(true,false);
-                if(!checkHealth(opponentBeast1)){
-                    Toast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT).show();
-                }
-                if(!checkHealth(userBeast1)){
-                    Toast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT).show();
-                }
+                checkForWinner();
             }
         });
 
         potionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(checkForWinner()){
+//                    StyleableToast.makeText(fightActivity.this,"Game is over",Toast.LENGTH_SHORT,R.style.mytoast).show();
+                    return;
+                }
                 if(potionUses > 0){
                     potionUses--;
                     Runnable r = new Runnable() {
@@ -181,19 +188,35 @@ public class fightActivity extends AppCompatActivity {
             h.postDelayed(r, 1000);
             return true;
         }
-        if(!checkHealth(userBeast1)){
-            StyleableToast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT,R.style.mytoast).show();
-            h.postDelayed(r, 1000);
-            return true;
+        if(!checkHealth(currBeast)){
+            if(currBeast.equals(userBeast1)){
+                Runnable sw = new Runnable() {
+                    @Override
+                    public void run(){
+                        StyleableToast.makeText(fightActivity.this,"Switching to second beast...", Toast.LENGTH_SHORT,R.style.mytoast).show();
+                        currBeast = userBeast2;
+                        userBeast.setImageResource(mUserTeam.getMonster2Img());
+                        setBeastHealth();;
+                    }
+                };
+                h.postDelayed(sw,2000);
+
+                return false;
+            }else{
+                StyleableToast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT,R.style.mytoast).show();
+                h.postDelayed(r, 2000);
+                return true;
+            }
+
         }
         return false;
     }
 
     private void attackTurn(Boolean defend, Boolean Item){
         if(Item){
-            int potionHeal = attributes.getBeastHealth(userBeast1.getBeastName())/4;
+            int potionHeal = attributes.getBeastHealth(currBeast.getBeastName())/4;
             StyleableToast.makeText(fightActivity.this, "You used a potion to heal " + potionHeal+ " health", Toast.LENGTH_SHORT,R.style.mytoast).show();
-            userBeast1.setHealth(userBeast1.getHealth() + potionHeal);
+            currBeast.setHealth(currBeast.getHealth() + potionHeal);
             setBeastHealth();
             Runnable r = new Runnable() {
                 @Override
@@ -213,13 +236,13 @@ public class fightActivity extends AppCompatActivity {
         if(opponentAttack == 0){
             opponentAttack = 1;
             StyleableToast.makeText(fightActivity.this, "Opponent guarded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
-            userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,true);
+            userAttackDamage = attack.attackTarget(currBeast, opponentBeast1,true);
         }else{
             StyleableToast.makeText(fightActivity.this, "Opponent attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
-            userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,false);
+            userAttackDamage = attack.attackTarget(currBeast, opponentBeast1,false);
         }
 
-        userBeast1.setHealth(userBeast1.getHealth()-opponentAttack);
+        currBeast.setHealth(currBeast.getHealth()-opponentAttack);
         setBeastHealth();
 
         int finalUserAttackDamage = userAttackDamage;
@@ -272,23 +295,23 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private void setBeastNames() {
-        userBeastName.setText("Name: " + userBeast1.getBeastName());
+        userBeastName.setText("Name: " + currBeast.getBeastName());
         opponentBeastName.setText("Name: " + opponentBeast1.getBeastName());
 
     }
 
     private void setBeastHealth() {
-        userHpBar.setMax(attributes.getBeastHealth(userBeast1.getBeastName()));
+        userHpBar.setMax(attributes.getBeastHealth(currBeast.getBeastName()));
         opHpBar.setMax(attributes.getBeastHealth(opponentBeast1.getBeastName()));
-        if(userBeast1.getHealth() > attributes.getBeastHealth(userBeast1.getBeastName())){
-            userHealth.setText("HP: "+ attributes.getBeastHealth(userBeast1.getBeastName()) + "/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
-            userHpBar.setProgress(attributes.getBeastHealth(userBeast1.getBeastName()));
+        if(currBeast.getHealth() > attributes.getBeastHealth(currBeast.getBeastName())){
+            userHealth.setText("HP: "+ attributes.getBeastHealth(currBeast.getBeastName()) + "/"+ attributes.getBeastHealth(currBeast.getBeastName()));
+            userHpBar.setProgress(attributes.getBeastHealth(currBeast.getBeastName()));
         }
-        else if(userBeast1.getHealth() >0){
-            userHealth.setText("HP: "+ userBeast1.getHealth() + "/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
-            userHpBar.setProgress(userBeast1.getHealth(),true);
+        else if(currBeast.getHealth() >0){
+            userHealth.setText("HP: "+ currBeast.getHealth() + "/"+ attributes.getBeastHealth(currBeast.getBeastName()));
+            userHpBar.setProgress(currBeast.getHealth(),true);
         }else{
-            userHealth.setText("HP: 0/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
+            userHealth.setText("HP: 0/"+ attributes.getBeastHealth(currBeast.getBeastName()));
             userHpBar.setProgress(0,true);
         }
 
@@ -377,11 +400,11 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private int opponentTurn(Boolean uGuard){
-        int attackDam = attack.attackTarget(opponentBeast1, userBeast1, uGuard);
-        if(userBeast1.getHealth() == attributes.getBeastHealth(userBeast1.getBeastName())){
+        int attackDam = attack.attackTarget(opponentBeast1, currBeast, uGuard);
+        if(currBeast.getHealth() == attributes.getBeastHealth(currBeast.getBeastName())){
             return( attackDam);
         }
-        else if(userBeast1.getHealth() - attackDam <= 0){
+        else if(currBeast.getHealth() - attackDam <= 0){
             return( attackDam);
         }
         else if(opponentBeast1.getHealth() <= 4){

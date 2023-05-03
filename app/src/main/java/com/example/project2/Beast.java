@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.project2.DB.AppDataBase;
 
+import java.util.Objects;
+
 @Entity(tableName = AppDataBase.BEAST_TABLE)
 public class Beast {
     @PrimaryKey(autoGenerate = true)
@@ -115,5 +117,18 @@ public class Beast {
 
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Beast beast = (Beast) o;
+        return health == beast.health && defense == beast.defense && attack == beast.attack && Objects.equals(beastName, beast.beastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(beastName, health, defense, attack);
     }
 }
