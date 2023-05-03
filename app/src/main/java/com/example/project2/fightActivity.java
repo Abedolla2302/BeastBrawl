@@ -83,29 +83,10 @@ public class fightActivity extends AppCompatActivity {
         loginUser(UserId);
         checkForUserTeam();
 
-        randomChoice.setSeed(124332598);
-
-        fightButton = mFightBinding.attackButton;
-        returnButton = mFightBinding.leaveButton;
-        defendButton = mFightBinding.defendButton;
-        potionButton = mFightBinding.potionButton;
-        userHpBar = mFightBinding.userHpBar;
-        opHpBar = mFightBinding.opHpBar;
-
-        userHealth = mFightBinding.hpLabel;
-        userBeastName = mFightBinding.userBeastNameLabel;
-
-        opponentHealth = mFightBinding.opponentHpLabel;
-        opponentBeastName = mFightBinding.opponentBeastNameLabel;
-
-        userBeast = mFightBinding.userBeast;
-
-        opponentBeast = mFightBinding.opponentBeast;
-
+        randomChoice.setSeed(System.currentTimeMillis());
+        wireUpDisplay();
         setBeasts();
-
         setBeastNames();
-
         setBeastHealth();
 
         fightButton.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +145,25 @@ public class fightActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void wireUpDisplay() {
+        fightButton = mFightBinding.attackButton;
+        returnButton = mFightBinding.leaveButton;
+        defendButton = mFightBinding.defendButton;
+        potionButton = mFightBinding.potionButton;
+        userHpBar = mFightBinding.userHpBar;
+        opHpBar = mFightBinding.opHpBar;
+
+        userHealth = mFightBinding.hpLabel;
+        userBeastName = mFightBinding.userBeastNameLabel;
+
+        opponentHealth = mFightBinding.opponentHpLabel;
+        opponentBeastName = mFightBinding.opponentBeastNameLabel;
+
+        userBeast = mFightBinding.userBeast;
+
+        opponentBeast = mFightBinding.opponentBeast;
     }
 
     private boolean checkForWinner(){

@@ -12,6 +12,7 @@
         <item name="stStrokeColor">#fff</item>
         <item name="stIconStart">@drawable/wolf</item>
         <item name="stIconEnd">@drawable/snake</item>
+        <item name="stGravity">top</item>
         <item name="stLength">LONG</item> LONG or SHORT
         <item name="stRadius">5dp</item>
     </style>

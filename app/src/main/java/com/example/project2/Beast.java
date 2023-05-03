@@ -13,12 +13,15 @@ public class Beast {
 
     static final String lobo = "lobo";
 
-    static final int loboImg = R.drawable.wolf;
+    static int loboImg = R.drawable.wolf;
     static final String mouse = "mouse";
-    static final int mouseImg = R.drawable.boxingmouse;
+    static int mouseImg = R.drawable.boxingmouse;
 
     static final String snake = "snake";
-    static final int SnakeImg = R.drawable.snake;
+    static int SnakeImg = R.drawable.snake;
+
+    static final String bird = "bird";
+    static int birdImage = R.drawable.bird;
 
     private String beastName;
 
@@ -40,6 +43,38 @@ public class Beast {
         this.health = b.getHealth();
         this.defense = b.getDefense();
         this.attack = b.getAttack();
+    }
+
+    public static int getBirdImage() {
+        return birdImage;
+    }
+
+    public static void setBirdImage(int birdImage) {
+        Beast.birdImage = birdImage;
+    }
+
+    public static int getLoboImg() {
+        return loboImg;
+    }
+
+    public static void setLoboImg(int loboImg) {
+        Beast.loboImg = loboImg;
+    }
+
+    public static int getMouseImg() {
+        return mouseImg;
+    }
+
+    public static void setMouseImg(int mouseImg) {
+        Beast.mouseImg = mouseImg;
+    }
+
+    public static int getSnakeImg() {
+        return SnakeImg;
+    }
+
+    public static void setSnakeImg(int snakeImg) {
+        SnakeImg = snakeImg;
     }
 
     public int getBeastId() {

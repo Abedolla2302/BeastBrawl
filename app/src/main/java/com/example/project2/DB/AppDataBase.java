@@ -10,7 +10,7 @@ import com.example.project2.Beast;
 import com.example.project2.User;
 import com.example.project2.teamLog;
 
-@Database(entities= {teamLog.class, User.class, Beast.class}, version = 4)
+@Database(entities= {teamLog.class, User.class, Beast.class}, version = 5)
 public abstract class AppDataBase extends RoomDatabase {
     public static final String DATABASE_NAME = "BeastBrawl.db";
     public static final String TEAMLOG_TABLE = "teamLog_table";

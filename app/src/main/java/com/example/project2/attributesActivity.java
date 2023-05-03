@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.project2.DB.AppDataBase;
@@ -51,7 +52,15 @@ public class attributesActivity extends AppCompatActivity {
     EditText snakeHpField;
     EditText snakeDefField;
 
+    EditText birdAttfield;
+    EditText birdHpField;
+    EditText birdDefField;
 
+    Switch loboAltSwitch;
+    Switch mouseAltSwitch;
+    Switch snakeAltSwitch;
+
+    Switch birdAltSwitch;
 
 
 
@@ -69,7 +78,9 @@ public class attributesActivity extends AppCompatActivity {
         addUserToPreference(UserId);
         loginUser(UserId);
         createBeast();
-        attributeButton = mAttributesBinding.changeAttributeButton;
+
+        checkAltForms();
+
 
         attributeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +88,7 @@ public class attributesActivity extends AppCompatActivity {
                 checkMouseChange();
                 checkLoboChangeChange();
                 checkSnakeChange();
+                checkBirdChange();
 
                 Toast.makeText(attributesActivity.this,"Beast Stats have changed,Going back to landing Page!",Toast.LENGTH_SHORT).show();
                 Intent intent = optionsActivity.intentFactory(getApplicationContext(),UserId);
@@ -85,7 +97,109 @@ public class attributesActivity extends AppCompatActivity {
             }
 
         });
+        loboAltSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(loboAltSwitch.isChecked()){
+                    Beast.setLoboImg(R.drawable.loboalt);
+                }else{
+                    Beast.setLoboImg(R.drawable.wolf);
+                }
+            }
+        });
 
+        mouseAltSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mouseAltSwitch.isChecked()){
+                    Beast.setMouseImg(R.drawable.mousealt);
+                }else{
+                    Beast.setMouseImg(R.drawable.mouse);
+                }
+            }
+        });
+
+        snakeAltSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(snakeAltSwitch.isChecked()){
+                    Beast.setSnakeImg(R.drawable.snakealt);
+                }else{
+                    Beast.setSnakeImg(R.drawable.snake);
+                }
+            }
+        });
+
+        birdAltSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(birdAltSwitch.isChecked()){
+                    Beast.setBirdImage(R.drawable.birdalt);
+                }else{
+                    Beast.setBirdImage(R.drawable.bird);
+                }
+            }
+        });
+
+    }
+
+    private void checkBirdChange() {
+        int newAtt = attributes.birdAttack;
+        int newHp = attributes.birdHealth;
+        int newDef = attributes.birdDefense;
+
+        int currField = 0;
+        try{
+            currField = Integer.parseInt(birdAttfield.getText().toString());
+        }catch(NumberFormatException e){
+            currField = newAtt;
+        }
+
+
+        if(currField != 0 && currField != newAtt){
+            newAtt = currField;
+            attributes.setBirdAttack(newAtt);
+        }
+
+        currField = 0;
+        try {
+            currField = Integer.parseInt(birdHpField.getText().toString());
+        }catch(NumberFormatException e){
+            currField = newHp;
+        }
+        if(currField != 0 && currField != newHp){
+            newHp = currField;
+            attributes.setBirdHealth(newHp);
+        }
+
+        currField = 0;
+        try {
+            currField = Integer.parseInt(birdDefField.getText().toString());
+        }catch(NumberFormatException e){
+            currField = newDef;
+        }
+        if(currField != 0 && currField != newDef){
+            newDef= currField;
+            attributes.setBirdDefense(newDef);
+        }
+
+        mBeastBrawlDAO.delete(mBeastBrawlDAO.getBeastByBeastName(Beast.bird));
+
+        Beast newBird = new Beast(Beast.bird,newHp,newDef,newAtt);
+        mBeastBrawlDAO.insert(newBird);
+
+    }
+
+    private void checkAltForms() {
+        if(Beast.getLoboImg() == R.drawable.loboalt){
+            loboAltSwitch.setChecked(true);
+        }
+        if(Beast.getMouseImg() == R.drawable.mousealt){
+            mouseAltSwitch.setChecked(true);
+        }
+        if(Beast.getSnakeImg()==R.drawable.snakealt){
+            snakeAltSwitch.setChecked(true);
+        }
     }
 
     private void checkSnakeChange() {
@@ -239,6 +353,17 @@ public class attributesActivity extends AppCompatActivity {
         snakeAttField = mAttributesBinding.snakeAttackField;
         snakeDefField = mAttributesBinding.snakeDefField;
         snakeHpField = mAttributesBinding.snakeHpField;
+
+        loboAltSwitch = mAttributesBinding.loboAltSwitch;
+        mouseAltSwitch = mAttributesBinding.mouseAltSwitch;
+        snakeAltSwitch = mAttributesBinding.snakeAltSwitch;
+
+        birdAltSwitch = mAttributesBinding.birdAltSwitch;
+        birdAttfield = mAttributesBinding.birdAttackField;
+        birdDefField = mAttributesBinding.birdDefField;
+        birdHpField = mAttributesBinding.birdHpField;
+
+        attributeButton = mAttributesBinding.changeAttributeButton;
     }
 
     private void getDatabase(){

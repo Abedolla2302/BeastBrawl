@@ -13,6 +13,34 @@ public class attributes {
     static int snakeAttack = 10;
     static int snakeDefense = 10;
 
+    static int birdHealth = 14;
+    static int birdAttack = 12;
+    static int birdDefense = 7;
+
+    public static int getBirdHealth() {
+        return birdHealth;
+    }
+
+    public static void setBirdHealth(int birdHealth) {
+        attributes.birdHealth = birdHealth;
+    }
+
+    public static int getBirdAttack() {
+        return birdAttack;
+    }
+
+    public static void setBirdAttack(int birdAttack) {
+        attributes.birdAttack = birdAttack;
+    }
+
+    public static int getBirdDefense() {
+        return birdDefense;
+    }
+
+    public static void setBirdDefense(int birdDefense) {
+        attributes.birdDefense = birdDefense;
+    }
+
     public static int getSnakeHealth() {
         return snakeHealth;
     }
@@ -92,6 +120,9 @@ public class attributes {
             return mouseHealth;
         }else if(beast.equals(Beast.snake)){
             return snakeHealth;
+        } else if (beast.equals(Beast.bird)) {
+            return birdHealth;
+
         }
         return 0;
     }

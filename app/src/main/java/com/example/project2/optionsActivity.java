@@ -72,11 +72,7 @@ public class optionsActivity extends AppCompatActivity {
 
         setContentView(view);
 
-        fightButton = optionsBinding.fightButton;
-        changeTeamButton = optionsBinding.changeTeamScreenButton;
-        editAttributesButton = optionsBinding.changeAttributesButton;
-        attributeImage = optionsBinding.imageView4;
-        teamTextView = optionsBinding.teamTextView;
+        wireUpDisplay();
 //
         teamTextView.setText("Your current team is " + mUserTeam.getMonster1() + " and " + mUserTeam.getMonster2());
 
@@ -132,6 +128,14 @@ public class optionsActivity extends AppCompatActivity {
         });
     }
 
+    private void wireUpDisplay() {
+        fightButton = optionsBinding.fightButton;
+        changeTeamButton = optionsBinding.changeTeamScreenButton;
+        editAttributesButton = optionsBinding.changeAttributesButton;
+        attributeImage = optionsBinding.imageView4;
+        teamTextView = optionsBinding.teamTextView;
+    }
+
     private void createBeast() {
         List<Beast> beast = mBeastBrawlDAO.getAllBeast();
         if(beast.size() <= 0){
@@ -141,7 +145,9 @@ public class optionsActivity extends AppCompatActivity {
 
             Beast snake = new Beast(Beast.snake,attributes.snakeHealth,attributes.snakeDefense,attributes.snakeAttack);
 
-            mBeastBrawlDAO.insert(lobo, mouse, snake);
+            Beast bird = new Beast(Beast.bird,attributes.birdHealth,attributes.birdDefense,attributes.birdAttack);
+
+            mBeastBrawlDAO.insert(lobo, mouse, snake,bird);
         }
         attributes.setLoboDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.lobo).getDefense());
         attributes.setLoboHealth(mBeastBrawlDAO.getBeastByBeastName(Beast.lobo).getHealth());
@@ -154,6 +160,12 @@ public class optionsActivity extends AppCompatActivity {
         attributes.setSnakeDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.snake).getDefense());
         attributes.setSnakeHealth(mBeastBrawlDAO.getBeastByBeastName(Beast.snake).getHealth());
         attributes.setSnakeDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.snake).getDefense());
+
+
+        attributes.setBirdDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.bird).getDefense());
+        attributes.setBirdHealth(mBeastBrawlDAO.getBeastByBeastName(Beast.bird).getHealth());
+        attributes.setBirdDefense(mBeastBrawlDAO.getBeastByBeastName(Beast.bird).getDefense());
+
     }
 
     private void loginUser(int userId) {

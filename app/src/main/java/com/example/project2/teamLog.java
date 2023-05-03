@@ -27,11 +27,13 @@ public class teamLog {
 
     private void setMonsterImgs() {
         if(monster1.equals(Beast.lobo)){
-            monster1Img = R.drawable.wolf;
+            monster1Img = Beast.loboImg;
         }else if(monster1.equals(Beast.mouse)){
-            monster1Img = R.drawable.boxingmouse;
+            monster1Img = Beast.mouseImg;
         }else if(monster1.equals(Beast.snake)){
-            monster1Img = R.drawable.snake;
+            monster1Img = Beast.SnakeImg;
+        } else if (monster1.equals(Beast.bird)) {
+            monster1Img = Beast.birdImage;
         }
 
         if(monster2.equals(Beast.lobo)){

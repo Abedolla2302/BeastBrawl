@@ -42,6 +42,8 @@ public class TeamSwitchActivity extends AppCompatActivity {
     Switch mouseSwitch;
 
     Switch snakeSwitch;
+
+    Switch birdSwitch;
     private int UserId = -1;
 
     private User mUser;
@@ -71,12 +73,13 @@ public class TeamSwitchActivity extends AppCompatActivity {
         loboSwitch = teamSwitchBinding.switchFirst;
         mouseSwitch = teamSwitchBinding.switchSecond;
         snakeSwitch = teamSwitchBinding.snakeSwitch;
+        birdSwitch = teamSwitchBinding.birdSwitch;
 
 
         teamSwitchButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(checkForOneBeast()){
+                if(checkForTwoBeast()){
                     Toast.makeText(TeamSwitchActivity.this,"Team switch Success!!",Toast.LENGTH_SHORT).show();
                     addTeamToUser();
                     Intent intent = optionsActivity.intentFactory(getApplicationContext(),UserId);
@@ -120,6 +123,17 @@ public class TeamSwitchActivity extends AppCompatActivity {
                 }
             }
         });
+
+        birdSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(birdSwitch.isChecked()){
+                    beastNames.add(Beast.bird);
+                }else{
+                    beastNames.remove(Beast.bird);
+                }
+            }
+        });
     }
 
     private void addTeamToUser() {
@@ -133,25 +147,12 @@ public class TeamSwitchActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkForOneBeast() {
-        int totalBeast = 0;
-        if(beastNames.isEmpty()){
+    private boolean checkForTwoBeast() {
+        if(beastNames.size() != 2){
             return false;
         }
-        if(loboSwitch.isChecked()){
-            totalBeast++;
-        }
-        if(mouseSwitch.isChecked()){
-            totalBeast++;
-        }
-        if(snakeSwitch.isChecked()){
-            totalBeast++;
-        }
-        if(totalBeast == 2){
-            return true;
-        }
 
-        return false;
+        return true;
     }
 
 
