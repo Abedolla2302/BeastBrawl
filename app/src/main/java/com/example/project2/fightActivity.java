@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,9 @@ public class fightActivity extends AppCompatActivity {
     TextView userBeastName;
 
     TextView opponentBeastName;
+
+    ProgressBar userHpBar;
+    ProgressBar opHpBar;
 
     private BeastBrawlDAO mBeastBrawlDAO;
 
@@ -85,6 +89,8 @@ public class fightActivity extends AppCompatActivity {
         returnButton = mFightBinding.leaveButton;
         defendButton = mFightBinding.defendButton;
         potionButton = mFightBinding.potionButton;
+        userHpBar = mFightBinding.userHpBar;
+        opHpBar = mFightBinding.opHpBar;
 
         userHealth = mFightBinding.hpLabel;
         userBeastName = mFightBinding.userBeastNameLabel;
@@ -144,12 +150,7 @@ public class fightActivity extends AppCompatActivity {
                     return;
                 }
                 attackTurn(false,true);
-                if(!checkHealth(opponentBeast1)){
-                    StyleableToast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT,R.style.mytoast).show();
-                }
-                if(!checkHealth(userBeast1)){
-                    StyleableToast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT,R.style.mytoast).show();
-                }
+
             }
         });
 
@@ -165,9 +166,32 @@ public class fightActivity extends AppCompatActivity {
 
     }
 
+    private boolean checkForWinner(){
+        Runnable r = new Runnable() {
+            @Override
+            public void run(){
+                StyleableToast.makeText(fightActivity.this,"Please leave fight to restart...", Toast.LENGTH_SHORT,R.style.mytoast).show();
+            }
+        };
+        Handler h = new Handler();
+
+        if(!checkHealth(opponentBeast1)){
+            StyleableToast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT,R.style.mytoast).show();
+
+            h.postDelayed(r, 1000);
+            return true;
+        }
+        if(!checkHealth(userBeast1)){
+            StyleableToast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT,R.style.mytoast).show();
+            h.postDelayed(r, 1000);
+            return true;
+        }
+        return false;
+    }
+
     private void attackTurn(Boolean defend, Boolean Item){
         if(Item){
-            int potionHeal = attributes.getBeastHealth(userBeast1.getBeastName())/8;
+            int potionHeal = attributes.getBeastHealth(userBeast1.getBeastName())/4;
             StyleableToast.makeText(fightActivity.this, "You used a potion to heal " + potionHeal+ " health", Toast.LENGTH_SHORT,R.style.mytoast).show();
             userBeast1.setHealth(userBeast1.getHealth() + potionHeal);
             setBeastHealth();
@@ -254,19 +278,26 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private void setBeastHealth() {
+        userHpBar.setMax(attributes.getBeastHealth(userBeast1.getBeastName()));
+        opHpBar.setMax(attributes.getBeastHealth(opponentBeast1.getBeastName()));
         if(userBeast1.getHealth() > attributes.getBeastHealth(userBeast1.getBeastName())){
             userHealth.setText("HP: "+ attributes.getBeastHealth(userBeast1.getBeastName()) + "/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
+            userHpBar.setProgress(attributes.getBeastHealth(userBeast1.getBeastName()));
         }
         else if(userBeast1.getHealth() >0){
             userHealth.setText("HP: "+ userBeast1.getHealth() + "/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
+            userHpBar.setProgress(userBeast1.getHealth(),true);
         }else{
             userHealth.setText("HP: 0/"+ attributes.getBeastHealth(userBeast1.getBeastName()));
+            userHpBar.setProgress(0,true);
         }
 
         if(opponentBeast1.getHealth() > 0){
             opponentHealth.setText("HP: "+ opponentBeast1.getHealth() + "/"+ attributes.getBeastHealth(opponentBeast1.getBeastName()));
+            opHpBar.setProgress(opponentBeast1.getHealth(),true);
         }else{
             opponentHealth.setText("HP: 0/" + attributes.getBeastHealth(opponentBeast1.getBeastName()));
+            opHpBar.setProgress(0,true);
         }
     }
 

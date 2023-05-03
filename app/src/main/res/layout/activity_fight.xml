@@ -27,6 +27,13 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ProgressBar
+            android:id="@+id/userHpBar"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="119dp"
+            android:layout_height="13dp"
+            android:progress="100" />
+
         <TextView
             android:id="@+id/hpLabel"
             android:layout_width="match_parent"
@@ -52,6 +59,13 @@
             android:text="Name"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/opHpBar"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="119dp"
+            android:layout_height="13dp"
+            android:progress="100" />
 
         <TextView
             android:id="@+id/opponentHpLabel"
