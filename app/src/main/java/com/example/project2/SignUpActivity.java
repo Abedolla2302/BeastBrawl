@@ -17,6 +17,8 @@ import com.example.project2.DB.AppDataBase;
 import com.example.project2.DB.BeastBrawlDAO;
 import com.example.project2.databinding.ActivitySignUpBinding;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private static final String USER_ID_KEY = "om.example.project2.userIdKey";
@@ -74,7 +76,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
     }

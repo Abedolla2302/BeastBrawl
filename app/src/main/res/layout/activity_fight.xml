@@ -145,12 +145,14 @@
         android:id="@+id/potionButton"
         android:layout_width="150dp"
         android:layout_height="52dp"
+        android:layout_marginTop="63dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FA9884"
         android:text="Potion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.543"
-        app:layout_constraintStart_toEndOf="@+id/defendButton" />
+        app:layout_constraintStart_toEndOf="@+id/defendButton"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

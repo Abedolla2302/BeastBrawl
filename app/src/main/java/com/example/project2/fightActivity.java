@@ -25,6 +25,8 @@ import com.example.project2.databinding.ActivityFightBinding;
 import java.util.List;
 import java.util.Random;
 
+import io.github.muddz.styleabletoast.StyleableToast;
+
 public class fightActivity extends AppCompatActivity {
 
     ActivityFightBinding mFightBinding;
@@ -133,7 +135,7 @@ public class fightActivity extends AppCompatActivity {
                     Runnable r = new Runnable() {
                         @Override
                         public void run(){
-                            Toast.makeText(fightActivity.this,"You only have "+ potionUses+ " potions left", Toast.LENGTH_SHORT).show();
+                            StyleableToast.makeText(fightActivity.this,"You only have "+ potionUses+ " potions left", Toast.LENGTH_SHORT,R.style.mytoast).show();
                         }
                     };
                     Handler h = new Handler();
@@ -143,10 +145,10 @@ public class fightActivity extends AppCompatActivity {
                 }
                 attackTurn(false,true);
                 if(!checkHealth(opponentBeast1)){
-                    Toast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(fightActivity.this,"YOU WON", Toast.LENGTH_SHORT,R.style.mytoast).show();
                 }
                 if(!checkHealth(userBeast1)){
-                    Toast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(fightActivity.this,"YOU LOST", Toast.LENGTH_SHORT,R.style.mytoast).show();
                 }
             }
         });
@@ -166,7 +168,7 @@ public class fightActivity extends AppCompatActivity {
     private void attackTurn(Boolean defend, Boolean Item){
         if(Item){
             int potionHeal = attributes.getBeastHealth(userBeast1.getBeastName())/8;
-            Toast.makeText(fightActivity.this, "You used a potion to heal " + potionHeal+ " health", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(fightActivity.this, "You used a potion to heal " + potionHeal+ " health", Toast.LENGTH_SHORT,R.style.mytoast).show();
             userBeast1.setHealth(userBeast1.getHealth() + potionHeal);
             setBeastHealth();
             Runnable r = new Runnable() {
@@ -186,10 +188,10 @@ public class fightActivity extends AppCompatActivity {
 
         if(opponentAttack == 0){
             opponentAttack = 1;
-            Toast.makeText(fightActivity.this, "Opponent guarded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(fightActivity.this, "Opponent guarded and only attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
             userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,true);
         }else{
-            Toast.makeText(fightActivity.this, "Opponent attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT).show();
+            StyleableToast.makeText(fightActivity.this, "Opponent attacked you for "+(opponentAttack)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
             userAttackDamage = attack.attackTarget(userBeast1, opponentBeast1,false);
         }
 
@@ -204,11 +206,11 @@ public class fightActivity extends AppCompatActivity {
                     if(Item){
 
                     }else{
-                        Toast.makeText(fightActivity.this, "You attacked opponent for "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT).show();
+                        StyleableToast.makeText(fightActivity.this, "You attacked opponent for "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
                         opponentBeast1.setHealth(opponentBeast1.getHealth()- finalUserAttackDamage);
                     }
                 }else{
-                    Toast.makeText(fightActivity.this, "You gaurded and only did "+(1)+" damage", Toast.LENGTH_SHORT).show();
+                    StyleableToast.makeText(fightActivity.this, "You gaurded and only did "+(1)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
                     opponentBeast1.setHealth(opponentBeast1.getHealth()- 1);
                 }
 

@@ -2,12 +2,19 @@ package com.example.project2;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.room.Room;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,8 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /*
-* desc: This is the Landing Screen. Accidentally names options but cant refactor without issues
-* */
+ * desc: This is the Landing Screen. Accidentally names options but cant refactor without issues
+ * */
 
 import com.example.project2.DB.AppDataBase;
 import com.example.project2.DB.BeastBrawlDAO;
@@ -58,6 +65,7 @@ public class optionsActivity extends AppCompatActivity {
         loginUser(UserId);
         createBeast();
         checkForUserTeam();
+        createNotificationChannel();
 
         optionsBinding = ActivityOptionsBinding.inflate(getLayoutInflater());
         View view = optionsBinding.getRoot();
@@ -70,24 +78,34 @@ public class optionsActivity extends AppCompatActivity {
         attributeImage = optionsBinding.imageView4;
         teamTextView = optionsBinding.teamTextView;
 //
-        teamTextView.setText("Your current team is "+mUserTeam.getMonster1() + " and "+ mUserTeam.getMonster2());
+        teamTextView.setText("Your current team is " + mUserTeam.getMonster1() + " and " + mUserTeam.getMonster2());
 
-        if(mUser.getIsAdmin() == 1){
+        if (mUser.getIsAdmin() == 1) {
             editAttributesButton.setVisibility(View.VISIBLE);
             attributeImage.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
             editAttributesButton.setVisibility(View.INVISIBLE);
             attributeImage.setVisibility(View.INVISIBLE);
         }
 
         helloUserText = optionsBinding.titlep;
-        helloUserText.setText("Hello "+mUser.getUserName()+ "!");
+        helloUserText.setText("Hello " + mUser.getUserName() + "!");
 
         fightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(optionsActivity.this, "Fight starting!!", Toast.LENGTH_SHORT).show();
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(optionsActivity.this, "myChannel")
+                        .setSmallIcon(Beast.loboImg)
+                        .setContentTitle("BeastBrawl")
+                        .setContentText("Don't Leave the Fight")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(optionsActivity.this);
+                if (ActivityCompat.checkSelfPermission(optionsActivity.this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                notificationManager.notify(123, builder.build());
+
                 Intent intent = fightActivity.intentFactory(getApplicationContext(), UserId);
                 startActivity(intent);
                 finish();
@@ -275,6 +293,18 @@ public class optionsActivity extends AppCompatActivity {
     private void clearUserFromPref(){
         addUserToPreference(-1);
 
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "BeastBrawl";
+            String description = "Ready to fight...";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("myChannel", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
