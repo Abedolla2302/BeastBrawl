@@ -29,7 +29,7 @@ public class teamLog {
         if(monster1.equals(Beast.lobo)){
             monster1Img = R.drawable.wolf;
         }else if(monster1.equals(Beast.mouse)){
-            monster1Img = R.drawable.mouse;
+            monster1Img = R.drawable.boxingmouse;
         }else if(monster1.equals(Beast.snake)){
             monster1Img = R.drawable.snake;
         }
@@ -37,7 +37,7 @@ public class teamLog {
         if(monster2.equals(Beast.lobo)){
             monster2Img = R.drawable.wolf;
         }else if(monster2.equals(Beast.mouse)){
-            monster2Img = R.drawable.mouse;
+            monster2Img = R.drawable.boxingmouse;
         }else if(monster2.equals(Beast.snake)){
             monster2Img = R.drawable.snake;
         }

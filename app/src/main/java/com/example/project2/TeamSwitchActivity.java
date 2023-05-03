@@ -46,6 +46,8 @@ public class TeamSwitchActivity extends AppCompatActivity {
 
     private User mUser;
 
+    private List<String> beastNames = new ArrayList<>();
+
 
 
 
@@ -85,32 +87,57 @@ public class TeamSwitchActivity extends AppCompatActivity {
 
             }
         });
+
+        mouseSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mouseSwitch.isChecked()){
+                    beastNames.add(Beast.mouse);
+                }else{
+                    beastNames.remove(Beast.mouse);
+                }
+            }
+        });
+
+        snakeSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(snakeSwitch.isChecked()){
+                    beastNames.add(Beast.snake);
+                }else{
+                    beastNames.remove(Beast.snake);
+                }
+            }
+        });
+
+        loboSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(loboSwitch.isChecked()){
+                    beastNames.add(Beast.lobo);
+                }else{
+                    beastNames.remove(Beast.lobo);
+                }
+            }
+        });
     }
 
     private void addTeamToUser() {
-        List<String> beastNames = new ArrayList<>();
-        List<Integer> imgNames = new ArrayList<>();
-        if(loboSwitch.isChecked()){
-            beastNames.add(Beast.lobo);
 
-        }
-        if(mouseSwitch.isChecked()){
-            beastNames.add(Beast.mouse);
-        }
-        if(snakeSwitch.isChecked()){
-            beastNames.add(Beast.snake);
-        }
-        beastNames.add(Beast.snake);
-        if(mBeastBrawlDAO.getTeamLogByUserId(UserId) != null){
+        teamLog newTeam = new teamLog(UserId, beastNames.get(0),beastNames.get(1));
+
+        if(mBeastBrawlDAO.getTeamLogByUserId(UserId)!= null){
             mBeastBrawlDAO.delete(mBeastBrawlDAO.getTeamLogByUserId(UserId));
         }
-        teamLog newTeam = new teamLog(UserId, beastNames.get(0),beastNames.get(1));
         mBeastBrawlDAO.insert(newTeam);
     }
 
 
     private boolean checkForOneBeast() {
         int totalBeast = 0;
+        if(beastNames.isEmpty()){
+            return false;
+        }
         if(loboSwitch.isChecked()){
             totalBeast++;
         }
@@ -120,9 +147,10 @@ public class TeamSwitchActivity extends AppCompatActivity {
         if(snakeSwitch.isChecked()){
             totalBeast++;
         }
-        if(totalBeast == 1){
+        if(totalBeast == 2){
             return true;
         }
+
         return false;
     }
 

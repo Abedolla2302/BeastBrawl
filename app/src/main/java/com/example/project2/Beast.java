@@ -15,7 +15,7 @@ public class Beast {
 
     static final int loboImg = R.drawable.wolf;
     static final String mouse = "mouse";
-    static final int mouseImg = R.drawable.mouse;
+    static final int mouseImg = R.drawable.boxingmouse;
 
     static final String snake = "snake";
     static final int SnakeImg = R.drawable.snake;
