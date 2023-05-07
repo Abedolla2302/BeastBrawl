@@ -10,7 +10,7 @@ Project 2 for CST338 Software Design
 - User/Admin Sign in
 - User can choose team
 - Admin can change attributes
-- Android App
+- Fight against Computer opponent
 
 
 ## Documentation
