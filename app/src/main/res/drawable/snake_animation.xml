@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+        android:oneshot="false">
+
+        <item android:drawable="@drawable/snakea1" android:duration="200" />
+        <item android:drawable="@drawable/snakea2" android:duration="200" />
+        <item android:drawable="@drawable/snakea3" android:duration="200" />
+        <item android:drawable="@drawable/snakea4" android:duration="200" />
+        <item android:drawable="@drawable/snakea5" android:duration="200" />
+        <item android:drawable="@drawable/snakea6" android:duration="200" />
+        <item android:drawable="@drawable/snakea7" android:duration="200" />
+        <item android:drawable="@drawable/snakea8" android:duration="200" />
+
+    </animation-list>

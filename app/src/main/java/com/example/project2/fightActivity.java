@@ -9,7 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -40,6 +40,14 @@ public class fightActivity extends AppCompatActivity {
 
     ImageView userBeast;
     ImageView opponentBeast;
+
+    ImageView shield;
+    AnimationDrawable shieldAnimation;
+
+    AnimationDrawable attackAnimation;
+    ImageView attackImage;
+
+    AnimationDrawable opponentSnake;
 
     TextView userHealth;
 
@@ -101,6 +109,10 @@ public class fightActivity extends AppCompatActivity {
 //                    StyleableToast.makeText(fightActivity.this,"Game is over",Toast.LENGTH_SHORT,R.style.mytoast).show();
                     return;
                 }
+
+                shieldAnimation.stop();
+                shield.setVisibility(View.INVISIBLE);
+
                 attackTurn(false,false);
                 checkForWinner();
 
@@ -114,6 +126,11 @@ public class fightActivity extends AppCompatActivity {
 //                    StyleableToast.makeText(fightActivity.this,"Game is over",Toast.LENGTH_SHORT,R.style.mytoast).show();
                     return;
                 }
+
+                attackAnimation.setVisible(false,true);
+                shield.setVisibility(View.VISIBLE);
+                shieldAnimation.start();
+
                 attackTurn(true,false);
                 checkForWinner();
             }
@@ -139,6 +156,8 @@ public class fightActivity extends AppCompatActivity {
                 }else{
                     return;
                 }
+                shieldAnimation.stop();
+                shield.setVisibility(View.INVISIBLE);
                 attackTurn(false,true);
 
             }
@@ -173,6 +192,10 @@ public class fightActivity extends AppCompatActivity {
         userBeast = mFightBinding.userBeast;
 
         opponentBeast = mFightBinding.opponentBeast;
+
+        shield = mFightBinding.shieldImg;
+
+        attackImage = mFightBinding.attImg;
 
     }
 
@@ -256,6 +279,10 @@ public class fightActivity extends AppCompatActivity {
                     if(Item){
 
                     }else{
+                        attackImage.setVisibility(View.VISIBLE);
+                        attackAnimation.setVisible(true,true);
+                        attackAnimation.start();
+
                         StyleableToast.makeText(fightActivity.this, "You attacked opponent for "+(finalUserAttackDamage)+" damage", Toast.LENGTH_SHORT,R.style.mytoast).show();
                         opponentBeast1.setHealth(opponentBeast1.getHealth()- finalUserAttackDamage);
                     }
@@ -268,7 +295,19 @@ public class fightActivity extends AppCompatActivity {
             }
         };
         Handler h = new Handler();
-        h.postDelayed(r, 1500);
+        h.postDelayed(r, 1000);
+
+        Runnable s = new Runnable(){
+            @Override
+            public void run() {
+//                Toast.makeText(fightActivity.this,"Did this",Toast.LENGTH_SHORT).show();
+                attackAnimation.stop();
+                attackAnimation.setVisible(false,true);
+                attackImage.setVisibility(View.INVISIBLE);
+
+            }
+        };
+        h.postDelayed(s,1600);
     }
 
     private boolean checkHealth(Beast b){
@@ -330,7 +369,11 @@ public class fightActivity extends AppCompatActivity {
 
     private void setBeasts() {
         userBeast.setImageResource(mUserTeam.getMonster1Img());
-        opponentBeast.setImageResource(Beast.SnakeImg);
+        opponentBeast.setImageResource(0);
+
+        opponentBeast.setBackgroundResource(R.drawable.snake_animation);
+        opponentSnake = (AnimationDrawable) opponentBeast.getBackground();
+        opponentSnake.start();
 
         int newHealth = attributes.getBeastHealth(mUserTeam.getMonster1());
         int newDefense = attributes.getBeastDefense(mUserTeam.getMonster1());
@@ -345,6 +388,17 @@ public class fightActivity extends AppCompatActivity {
         opponentBeast1 = new Beast(mBeastBrawlDAO.getBeastByBeastName(Beast.snake));
         opponentBeastMaxhealth = opponentBeast1.getHealth()*3;
         opponentBeast1.setHealth(opponentBeastMaxhealth);
+
+        attackImage.setImageResource(0);
+        attackImage.setBackgroundResource(R.drawable.attack_animation);
+        attackAnimation = (AnimationDrawable) attackImage.getBackground();
+        attackImage.setVisibility(View.INVISIBLE);
+
+        shield.setVisibility(View.INVISIBLE);
+        shield.setImageResource(0);
+        shield.setBackgroundResource(R.drawable.shield_animation);
+        shieldAnimation = (AnimationDrawable) shield.getBackground();
+        shield.setVisibility(View.INVISIBLE);
     }
 
     private void getDatabase(){

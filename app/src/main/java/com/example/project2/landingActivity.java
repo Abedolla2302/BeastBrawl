@@ -318,7 +318,6 @@ public class landingActivity extends AppCompatActivity {
 
     private void clearUserFromPref(){
         addUserToPreference(-1);
-
     }
 
     private void createNotificationChannel() {

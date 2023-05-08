@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/peach"
-    android:backgroundTint="@color/peach"
+    android:background="#A9907E"
+    android:backgroundTint="#A9907E"
     tools:context=".fightActivity">
 
     <LinearLayout
@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.286"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104">
+        app:layout_constraintVertical_bias="0.05">
 
         <TextView
             android:id="@+id/userBeastNameLabel"
@@ -47,10 +47,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintHorizontal_bias="0.766"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104">
+        app:layout_constraintVertical_bias="0.05">
 
         <TextView
             android:id="@+id/opponentBeastNameLabel"
@@ -88,8 +88,8 @@
 
     <ImageView
         android:id="@+id/opponentBeast"
-        android:layout_width="151dp"
-        android:layout_height="138dp"
+        android:layout_width="128dp"
+        android:layout_height="121dp"
         android:layout_marginTop="168dp"
         android:layout_marginBottom="12dp"
         android:scaleX="-1"
@@ -99,7 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/wolf" />
+        app:srcCompat="@drawable/snake" />
 
     <ImageView
         android:id="@+id/userBeast"
@@ -114,60 +114,82 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/boxingmouse" />
 
-    <Button
-        android:id="@+id/attackButton"
-        android:layout_width="150dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="68dp"
-        android:backgroundTint="#FA9884"
-        android:text="Attack"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <Button
-        android:id="@+id/leaveButton"
-        android:layout_width="150dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="68dp"
-        android:backgroundTint="#FA9884"
-        android:text="Leave Fight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
-        app:layout_constraintStart_toEndOf="@+id/attackButton"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <Button
-        android:id="@+id/defendButton"
-        android:layout_width="150dp"
-        android:layout_height="52dp"
-        android:backgroundTint="#FA9884"
-        android:text="Defend"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
+        app:layout_constraintHorizontal_bias="0.777"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.797" />
+        app:layout_constraintVertical_bias="0.483">
 
-    <Button
-        android:id="@+id/potionButton"
-        android:layout_width="150dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FA9884"
-        android:text="Potion"
+        <Button
+            android:id="@+id/leaveButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FA9884"
+            android:text="Leave Fight" />
+
+        <Button
+            android:id="@+id/potionButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FA9884"
+            android:text="Potion" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.483">
+
+        <Button
+            android:id="@+id/attackButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FA9884"
+            android:text="Attack" />
+
+        <Button
+            android:id="@+id/defendButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FA9884"
+            android:text="Defend" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/shieldImg"
+        android:layout_width="160dp"
+        android:layout_height="158dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
-        app:layout_constraintStart_toEndOf="@+id/defendButton"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442"
+        app:srcCompat="@drawable/attack1" />
+
+    <ImageView
+        android:id="@+id/attImg"
+        android:layout_width="121dp"
+        android:layout_height="107dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/opponentBeast"
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toEndOf="@+id/shieldImg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/attack3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

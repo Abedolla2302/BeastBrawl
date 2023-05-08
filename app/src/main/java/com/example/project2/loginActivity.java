@@ -184,6 +184,7 @@ public class loginActivity extends AppCompatActivity {
             User defaultUser = new User("testuser1", "testuser1",0);
             User defaultUser2 = new User("admin2", "admin2",1);
             mBeastBrawlDAO.insert(defaultUser,defaultUser2);
+            return;
         }
 
         Intent intent = MainActivity.intentFactory(this,-1);
