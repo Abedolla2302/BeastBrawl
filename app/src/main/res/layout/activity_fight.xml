@@ -9,6 +9,7 @@
     tools:context=".fightActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="140dp"
         android:layout_height="78dp"
         android:orientation="vertical"
@@ -42,6 +43,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="140dp"
         android:layout_height="78dp"
         android:orientation="vertical"
@@ -177,7 +179,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.442"
-        app:srcCompat="@drawable/attack1" />
+        app:srcCompat="@drawable/shield1" />
 
     <ImageView
         android:id="@+id/attImg"
@@ -191,5 +193,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/attack3" />
+
+    <ImageView
+        android:id="@+id/potionImg"
+        android:layout_width="43dp"
+        android:layout_height="47dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.164"
+        app:srcCompat="@drawable/potion1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,6 +47,9 @@ public class fightActivity extends AppCompatActivity {
     AnimationDrawable attackAnimation;
     ImageView attackImage;
 
+    ImageView potion;
+    AnimationDrawable potionAnimation;
+
     AnimationDrawable opponentSnake;
 
     TextView userHealth;
@@ -156,6 +159,10 @@ public class fightActivity extends AppCompatActivity {
                 }else{
                     return;
                 }
+
+                potionAnimation.setVisible(true,true);
+                potion.setVisibility(View.VISIBLE);
+                potionAnimation.start();
                 shieldAnimation.stop();
                 shield.setVisibility(View.INVISIBLE);
                 attackTurn(false,true);
@@ -197,6 +204,8 @@ public class fightActivity extends AppCompatActivity {
 
         attackImage = mFightBinding.attImg;
 
+
+
     }
 
     private boolean checkForWinner(){
@@ -222,7 +231,7 @@ public class fightActivity extends AppCompatActivity {
                         StyleableToast.makeText(fightActivity.this,"Switching to second beast...", Toast.LENGTH_SHORT,R.style.mytoast).show();
                         currBeast = userBeast2;
                         userBeast.setImageResource(mUserTeam.getMonster2Img());
-                        setBeastHealth();;
+                        setBeastHealth();
                     }
                 };
                 h.postDelayed(sw,2000);
@@ -270,6 +279,9 @@ public class fightActivity extends AppCompatActivity {
 
         currBeast.setHealth(currBeast.getHealth()-opponentAttack);
         setBeastHealth();
+        if(currBeast.getHealth() <=0){
+            return;
+        }
 
         int finalUserAttackDamage = userAttackDamage;
         Runnable r = new Runnable() {
@@ -343,7 +355,6 @@ public class fightActivity extends AppCompatActivity {
     }
 
     private void setBeastHealth() {
-
         userHpBar.setMax(attributes.getBeastHealth(currBeast.getBeastName()));
         opHpBar.setMax(opponentBeastMaxhealth);
         if(currBeast.getHealth() > attributes.getBeastHealth(currBeast.getBeastName())){
@@ -399,6 +410,12 @@ public class fightActivity extends AppCompatActivity {
         shield.setBackgroundResource(R.drawable.shield_animation);
         shieldAnimation = (AnimationDrawable) shield.getBackground();
         shield.setVisibility(View.INVISIBLE);
+
+        potion = mFightBinding.potionImg;
+        potion.setImageResource(0);
+        potion.setBackgroundResource(R.drawable.potion_animation);
+        potionAnimation = (AnimationDrawable) potion.getBackground();
+        potion.setVisibility(View.INVISIBLE);
     }
 
     private void getDatabase(){

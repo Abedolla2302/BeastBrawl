@@ -85,7 +85,7 @@ public class TeamSwitchActivity extends AppCompatActivity {
                     Intent intent = landingActivity.intentFactory(getApplicationContext(),UserId);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(TeamSwitchActivity.this,"please pick One beast",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeamSwitchActivity.this,"please pick only Two beast",Toast.LENGTH_SHORT).show();
                 }
 
             }
